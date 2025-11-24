@@ -5,7 +5,6 @@ import streamlit as st
 from dotenv import load_dotenv
 from llama_index.core import VectorStoreIndex,SimpleDirectoryReader, Settings
 from llama_index.llms.gemini import Gemini
-from llama_index.embeddings.gemini import GeminiEmbedding
 
 
 #loading the env
