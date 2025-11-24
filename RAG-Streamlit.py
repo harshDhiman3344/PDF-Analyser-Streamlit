@@ -22,6 +22,19 @@ logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
 
+# --------------------------
+# CUSTOM GEMINI API KEY INPUT
+# --------------------------
+st.sidebar.title("Settings")
+user_api_key = st.sidebar.text_input("Gemini API Key", type="password")
+
+if user_api_key:
+    os.environ["GOOGLE_API_KEY"] = user_api_key
+    st.sidebar.success("API key set!")
+else:
+    st.sidebar.warning("Please enter your Gemini API key to continue.")
+    st.stop()  # Stop app until API key is entered
+
 
 
 Settings.llm = Gemini(model="gemini-2.5-flash")
@@ -79,6 +92,7 @@ if "index" in st.session_state:
         st.write("Response: ")
         st.write(str(response))
     
+
 
 
 else:
