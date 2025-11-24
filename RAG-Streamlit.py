@@ -21,9 +21,10 @@ logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
 
-# --------------------------
-# CUSTOM GEMINI API KEY INPUT
-# --------------------------
+
+
+#uses user's api key here: 
+
 st.sidebar.title("Settings")
 user_api_key = st.sidebar.text_input("Gemini API Key", type="password")
 
@@ -39,15 +40,24 @@ else:
 Settings.llm = Gemini(model="gemini-2.5-flash")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
-st.title("VectorBrain")
-st.title("RAG PDF ANALYSER")
+
+st.markdown('<div class="main-box">', unsafe_allow_html=True)
+
+#Title styles
+st.markdown("""
+<h1 style='text-align:center; color:white; margin-bottom:0;'>VectorBrain</h1>
+<h3 style='text-align:center; color:#aac4ff; margin-top:5px;'>RAG PDF Analyzer</h3>
+""", unsafe_allow_html=True)
+
 st.write("Upload a PDF and ask questions about it.")
+
 
 uploaded_files = st.file_uploader(
     "Upload your PDFs here",
     type="pdf",
     accept_multiple_files=True
 )
+
 
 if uploaded_files:
     data_dir = "uploaded_data"
@@ -82,7 +92,6 @@ if "index" in st.session_state:
     st.write("Ask about the documents")
     prompt = st.text_input("your question:")
 
-
     if st.button("Ask"):
         with st.spinner('Thinking'):  
             query_engine = st.session_state["index"].as_query_engine()
@@ -90,9 +99,11 @@ if "index" in st.session_state:
 
         st.write("Response: ")
         st.write(str(response))
-    
-
-
 
 else:
     st.info("Upload a pdf file to start")
+
+
+
+
+st.markdown('</div>', unsafe_allow_html=True)
