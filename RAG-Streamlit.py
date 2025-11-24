@@ -39,7 +39,7 @@ else:
 Settings.llm = Gemini(model="gemini-2.5-flash")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
-st.title("~VectorBrain~")
+st.title("VectorBrain")
 st.title("RAG PDF ANALYSER")
 st.write("Upload a PDF and ask questions about it.")
 
