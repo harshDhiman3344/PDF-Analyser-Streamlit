@@ -45,6 +45,15 @@ if st.session_state.theme == "dark":
             background-color: #2d2d2d;
             color: white;
         }
+        p, div, span, label {
+            color: #fafafa !important;
+        }
+        section[data-testid="stFileUploader"] {
+            background-color: #2b5a9e;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #4a7fc1;
+        }
     </style>
     """, unsafe_allow_html=True)
 else:
@@ -62,6 +71,15 @@ else:
         .stTextInput > div > div > input {
             background-color: #ffffff;
             color: #000000;
+        }
+        p, div, span, label, h1, h2, h3 {
+            color: #000000 !important;
+        }
+        section[data-testid="stFileUploader"] {
+            background-color: #b3d9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #6bb3ff;
         }
     </style>
     """, unsafe_allow_html=True)
