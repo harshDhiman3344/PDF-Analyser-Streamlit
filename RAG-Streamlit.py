@@ -20,12 +20,64 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
+# Initialize theme in session state
+if "theme" not in st.session_state:
+    st.session_state.theme = "dark"
+
+# Theme toggle function
+def toggle_theme():
+    st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
+
+# Apply theme CSS based on current theme
+if st.session_state.theme == "dark":
+    st.markdown("""
+    <style>
+        .stApp {
+            background-color: #0e1117;
+            color: #fafafa;
+        }
+        .main-box {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .stTextInput > div > div > input {
+            background-color: #2d2d2d;
+            color: white;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <style>
+        .stApp {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .main-box {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .stTextInput > div > div > input {
+            background-color: #ffffff;
+            color: #000000;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+
 
 
 
 #uses user's api key here: 
 
 st.sidebar.title("Settings")
+
+# Theme toggle button in sidebar
+theme_button_label = "☀️ Light Mode" if st.session_state.theme == "dark" else "🌙 Dark Mode"
+st.sidebar.button(theme_button_label, on_click=toggle_theme)
+
 user_api_key = st.sidebar.text_input("Gemini API Key", type="password")
 
 if user_api_key:
@@ -44,9 +96,11 @@ Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 st.markdown('<div class="main-box">', unsafe_allow_html=True)
 
 #Title styles
-st.markdown("""
-<h1 style='text-align:center; color:white; margin-bottom:0;'>VectorBrain</h1>
-<h3 style='text-align:center; color:#aac4ff; margin-top:5px;'>RAG PDF Analyzer</h3>
+title_color = "white" if st.session_state.theme == "dark" else "#1e1e1e"
+subtitle_color = "#aac4ff" if st.session_state.theme == "dark" else "#5a7fb8"
+st.markdown(f"""
+<h1 style='text-align:center; color:{title_color}; margin-bottom:0;'>VectorBrain</h1>
+<h3 style='text-align:center; color:{subtitle_color}; margin-top:5px;'>RAG PDF Analyzer</h3>
 """, unsafe_allow_html=True)
 
 st.write("Upload a PDF and ask questions about it.")
@@ -107,3 +161,8 @@ else:
 
 
 st.markdown('</div>', unsafe_allow_html=True)
+
+
+
+#VERSION 1 COMPLETE
+
